@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - budg-it</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header class="d-flex justify-content-between align-items-center p-3 bg-success text-white">
+        <h1>Register</h1>
+    </header>
+    
+    <main class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <h2 class="text-center mb-4">Create Your Account</h2>
+                    <form th:action="@{/register}" th:object="${user}" method="post">
+                        
+
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" id="firstName" th:field="*{firstName}" placeholder="Enter your first name" required />
+                            <div th:if="${#fields.hasErrors('firstName')}" class="text-danger">
+                                <p th:errors="*{firstName}">First Name Error</p>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" th:field="*{lastName}" placeholder="Enter your last name" required />
+                            <div th:if="${#fields.hasErrors('lastName')}" class="text-danger">
+                                <p th:errors="*{lastName}">Last Name Error</p>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Enter your email" required />
+                            <div th:if="${#fields.hasErrors('email')}" class="text-danger">
+                                <p th:errors="*{email}">Email Error</p>
+                            </div>
+                        </div>
+
+						
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="text" class="form-control" id="phone" th:field="*{phone}" placeholder="Enter your phone number" required />
+                            <div th:if="${#fields.hasErrors('phone')}" class="text-danger">
+                                <p th:errors="*{phone}">Phone Number Error</p>
+                            </div>
+                        </div>
+
+						
+                        <div class="form-group">
+                            <label for="userName">User Name</label>
+                            <input type="text" class="form-control" id="userName" th:field="*{userName}" placeholder="Enter a user name" required />
+                            <div th:if="${#fields.hasErrors('userName')}" class="text-danger">
+                                <p th:errors="*{userName}">User Name Error</p>
+                            </div>
+                        </div>
+
+						
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Enter a password" required />
+                            <div th:if="${#fields.hasErrors('password')}" class="text-danger">
+                                <p th:errors="*{password}">Password Error</p>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-block">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
