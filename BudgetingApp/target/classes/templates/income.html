@@ -28,7 +28,6 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Loop through the incomeList and display each item -->
                 <tr th:each="income : ${incomeList}">
                     <td th:text="${income.description}"></td>
                     <td th:text="${income.amount}"></td>
