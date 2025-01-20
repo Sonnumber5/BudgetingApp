@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Budgeting App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header>
+        <h1>Budgeting Application</h1>
+        <nav>
+            <ul>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="section" id="income" th:onclick="|window.location='/income'|">
+            <h2>Income</h2>
+        </div>
+        <div class="section" id="expenses" th:onclick="|window.location='/expenses'|">
+            <h2>Expenses</h2>
+        </div>
+    </main>
+</body>
+</html>
