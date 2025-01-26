@@ -1,0 +1,105 @@
+button {
+    padding: 20px 40px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: block;
+    width: calc(100% - 300px);
+    box-sizing: border-box;
+}
+
+#income {
+    background: linear-gradient(to bottom, #7DD16D, #45A533);
+    height: 70px;
+    min-width: 200px;
+}
+
+#income:hover {
+    background: linear-gradient(to bottom, #45A533, #7DD16D);
+}
+
+#addIncome {
+    background: linear-gradient(to bottom, #7DD16D, #45A533);
+    font-size: 18px;
+    height: 50px;
+    width: 200px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+}
+
+#addIncome:hover {
+    background: linear-gradient(to bottom, #45A533, #7DD16D);
+    transform: scale(1.05);
+}
+
+#addExpense {
+    background: linear-gradient(to bottom, #FFB74D, #FF8C00);
+    font-size: 18px;
+    height: 50px;
+    width: 200px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+}
+
+#addExpense:hover {
+    background: linear-gradient(to bottom, #FF8C00, #FFB74D);
+    transform: scale(1.05);
+}
+
+
+#expenses {
+    background: linear-gradient(to bottom, #FFB74D, #FF8C00);
+    height: 70px;
+    min-width: 200px;
+}
+
+#expenses:hover{
+	background: linear-gradient(to bottom, #FF8C00, #FFB74D);
+}
+
+#budget {
+    background: linear-gradient(to bottom, #6A66DB, #3934B1);
+    height: 70px;
+    min-width: 200px;
+}
+
+#budget:hover{
+	background: linear-gradient(to bottom, #3934B1, #6A66DB);
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}

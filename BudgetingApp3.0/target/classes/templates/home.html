@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="${title}">Home</title>
+		<!-- This file will be using styles.css for formatting (as well as defaultTemplate)-->
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div>
+				<!-- this is a button and it sends a signal to the controller that contians the @GetMapping("/incomes"). The id refers to the style of button from the styles.css stylesheet-->
+                <a href="#" th:href="@{/incomes}" id="income" style="margin-right: 10px;">
+                    <button type="button" id="income">Income</button>
+                </a>
+
+				<!-- this is a button and it sends a signal to the controller that contians the @GetMapping("/expense"). The id refers to the style of button from the styles.css stylesheet-->
+                <a href="#" th:href="@{/expenses}" id="expenses" style="margin-right: 10px;">
+                    <button type="button" id="expenses">Expenses</button>
+                </a>
+
+				<!-- this is a button and it sends a signal to the controller that contians the @GetMapping("/budget"). The id refers to the style of button from the styles.css stylesheet-->
+                <a href="#" th:href="@{/budget}" id="budget">
+                    <button type="button" id="budget">Budget</button>
+                </a>
+            </div>
+        </div>
+    </body>
+</html>
