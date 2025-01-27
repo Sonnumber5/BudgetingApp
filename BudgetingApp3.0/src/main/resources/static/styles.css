@@ -87,6 +87,30 @@ button {
     min-width: 200px;
 }
 
+#addBudget {
+    background: linear-gradient(to bottom, #6A66DB, #3934B1);
+    font-size: 18px;
+    height: 50px;
+    width: 200px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+}
+
+#addBudget:hover {
+    background: linear-gradient(to bottom, #3934B1, #6A66DB);
+    transform: scale(1.05);
+}
+
 #budget:hover{
 	background: linear-gradient(to bottom, #3934B1, #6A66DB);
 }

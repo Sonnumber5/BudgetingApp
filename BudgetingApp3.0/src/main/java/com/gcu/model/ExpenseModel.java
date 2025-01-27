@@ -11,6 +11,7 @@ public class ExpenseModel {
     private String category;
    // private LocalDate date;
 
+    //constructor
     public ExpenseModel(String description, double amount, String category) {
         this.description = description;
         this.amount = amount;

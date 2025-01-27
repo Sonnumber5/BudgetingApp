@@ -10,19 +10,22 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/service")
+@RequestMapping("/incomeservice")
 public class IncomesRestService {
 
+	//autowires the IncomesBusinessInterface to this class
     @Autowired
     private IncomesBusinessInterface service;
 
-    @GetMapping(path = "/getjson", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<IncomeModel> getOrdersAsJson() {
+    //display the all income items as JSON
+    @GetMapping(path = "/getincomejson", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<IncomeModel> getIncomesAsJson() {
         return service.getIncomes();
     }
 
-    @GetMapping(path = "/getxml", produces = {MediaType.APPLICATION_XML_VALUE})
-    public IncomeList getOrdersAsXml() {
+    //displays all income items at XML
+    @GetMapping(path = "/getincomexml", produces = {MediaType.APPLICATION_XML_VALUE})
+    public IncomeList getIncomesAsXml() {
         IncomeList list = new IncomeList();
         list.setIncomes(service.getIncomes());
         return list;

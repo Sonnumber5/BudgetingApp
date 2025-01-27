@@ -17,9 +17,11 @@ import com.gcu.model.IncomeModel;
 @Controller
 public class ExpenseController {
 
+	//autowire the Expense business layer to this class 
     @Autowired
     private ExpensesBusinessService expensesBusinessService;
 
+    // receives a POST request, adds a list of expenses from the business layer to the thymeleaf template, and returns the expenses.html view
     @GetMapping("/expenses")
     public String showExpensePage(Model model) {
     	List<ExpenseModel> expenses = expensesBusinessService.getExpenses();
@@ -30,6 +32,7 @@ public class ExpenseController {
         return "expenses";
     }
     
+    //receives a GET request from the thymeleaf template, receives form input, and creates an expense item from the input, then returns the the expenses.html view
     @PostMapping("/addExpense")
     public String addIncome(@RequestParam String description, @RequestParam double amount, @RequestParam String category) {
     	expensesBusinessService.addExpense(description, amount, category);

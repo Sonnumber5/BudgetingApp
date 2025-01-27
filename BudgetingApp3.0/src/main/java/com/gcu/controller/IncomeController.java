@@ -14,9 +14,11 @@ import java.util.List;
 @Controller
 public class IncomeController {
 
+	//autowire the main income business logic to this class
     @Autowired
     private IncomesBusinessService incomesBusinessService;
 
+    //receives a POST request, grabs all the incomes items from the business layer, returns them to the  thymeleaf template, and returns the incomes.html view
     @GetMapping("/incomes")
     public String showIncomes(Model model) {
         List<IncomeModel> incomes = incomesBusinessService.getIncomes();
@@ -27,6 +29,7 @@ public class IncomeController {
         return "incomes"; 
     }
     
+    //receives a GET request, receives input from a form, creates an new instance of IncomeModel, and adds that item to the business layer, then redirected to the incomes.html view 
     @PostMapping("/addIncome")
     public String addIncome(@RequestParam String description, @RequestParam double amount) {
     	incomesBusinessService.addIncome(description, amount);
