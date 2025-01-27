@@ -11,6 +11,7 @@ public class IncomeModel {
 	@NotNull(message="amount is a required field")
 	private double amount;
 	
+	//constructor
 	public IncomeModel(String description, double amount) {
 		this.description = description;
 		this.amount = amount;
