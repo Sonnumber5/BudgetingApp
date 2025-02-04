@@ -16,6 +16,14 @@
                     <label for="amount">Amount</label>
                     <input type="number" id="amount" name="amount" step="0.01" required>
                 </div>
+				<div>
+					<label for="date">Date</label>
+					<input type="date" id="date" name="date" required>
+				</div>
+				<div>
+					<label for="notes">Notes</label>
+					<input type="text" id="notes" name="notes">
+				</div>
                 <div>
                     <button id="addIncome" type="submit">Add Income</button>
                 </div>
@@ -26,6 +34,8 @@
                     <tr>
                         <th style="text-align:center">Description</th>
                         <th style="text-align:center">Amount</th>
+						<th style="text-align:center">Date</th>
+						<th style="text-align:center">Notes</th>
                     </tr>        
                 </thead>
                 <tbody>
@@ -35,6 +45,8 @@
                     <tr th:each="income : ${incomes}">
                         <td style="text-align:center"><h5 th:text="${income.description}">Salary</h5></td>
                         <td style="text-align:center"><h5 th:text="${income.amount}">0.00</h5></td>
+						<td style="text-align:center"><h5 th:text="${#dates.format(#dates.createNow(), 'MM/dd/yy')}">1/1/01</h5></td>
+						<td style="text-align:center"><h5 th:text="${income.notes != null ? income.notes : 'No notes'}">Notes</h5></td>
                     </tr>
                 </tbody>
             </table>

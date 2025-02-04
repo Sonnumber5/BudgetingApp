@@ -1,33 +1,27 @@
 package com.gcu.business;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
-import com.gcu.model.ExpenseModel;
-import com.gcu.model.IncomeModel;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.gcu.data.ExpenseDataService;
+import com.gcu.data.entities.ExpenseEntity;
 
 //main business logic for the expenses
 public class ExpensesBusinessService implements ExpensesBusinessInterface {
 
-	//list of all expenses added by the user
-	private List<ExpenseModel> expenses = new ArrayList<>();
-	
-	@Override
-	public void test() {
-		System.out.println("Hello from the ExpensesBusinessService");
-	}
+	@Autowired
+	private ExpenseDataService expenseDataService;
 	
 	//used too add an expense item to the list
 	@Override
-    public void addExpense(String description, double amount, String category) {
-        expenses.add(new ExpenseModel(description, amount, category));  
-	}
-        
-	//retrieves all expense items
-	@Override
-	public List<ExpenseModel> getExpenses(){
-        
-        return expenses;
+    public void addExpense(String description, double amount, String category, LocalDate date, String notes) {
+		ExpenseEntity expense = new ExpenseEntity(description, amount, category, date, notes);
+		try {
+			expenseDataService.create(expense);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
