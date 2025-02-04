@@ -1,8 +1,6 @@
 package com.gcu.controller;
 
 import com.gcu.business.IncomesBusinessInterface;
-import com.gcu.business.IncomesBusinessService;
-import com.gcu.data.DataAccessInterface;
 import com.gcu.data.entities.IncomeEntity;
 import com.gcu.data.repositories.IncomeRepository;
 import com.gcu.model.IncomeModel;
@@ -12,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.stream.Collectors;

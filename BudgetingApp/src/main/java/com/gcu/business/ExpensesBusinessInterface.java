@@ -8,4 +8,5 @@ public interface ExpensesBusinessInterface {
 	public void init();
 	public void destroy();
 	public void addExpense(String description, double amount, String category, LocalDate date, String notes);
+	public double calculateTotalExpenses();
 }

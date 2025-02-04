@@ -1,6 +1,9 @@
 package com.gcu.business;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import com.gcu.data.entities.ExpenseEntity;
 
 public interface IncomesBusinessInterface {
 	
