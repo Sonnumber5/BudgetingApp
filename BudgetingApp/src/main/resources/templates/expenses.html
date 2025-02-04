@@ -15,6 +15,14 @@
                    <label for="category">Category</label>
                    <input type="text" id="category" name="category" step="category" required>
                </div>
+			   <div>
+					<label for="date">Date</label>
+					<input type="date" id="date" name="date" required>
+			   </div>
+			   <div>
+					<label for="notes">Notes</label>
+					<input type="text" id="notes" name="notes">
+			   </div>
                 <div>
                     <button id="addExpense" type="submit">Add Expense</button>
                 </div>
@@ -25,6 +33,8 @@
 							<th style="text-align:center">Description</th>
 							<th style="text-align:center">Amount</th>
 							<th style="text-align:center">Category</th>
+							<th style = "text-align:center">Date</th>
+							<th style="text-align:center">Notes</th>
 						</tr>		
 					</thead>
 					<tbody>
@@ -35,6 +45,8 @@
 							<td style="text-align:center"><h5 th:text="${expense.description}">Walmart</h5></td>
 							<td style="text-align:center"><h5 th:text="${expense.amount}">0.00</h5></td>
 							<td style="text-align:center"><h5 th:text="${expense.category}">Groceries</h5></td>
+							<td style="text-align:center"><h5 th:text="${#dates.format(#dates.createNow(), 'MM/dd/yy')}">1/1/01</h5></td>
+							<td style="text-align:center"><h5 th:text="${expense.notes != null ? expense.notes : 'No notes'}">Notes</h5></td>
 						</tr>
 					</tbody>
 				</table>

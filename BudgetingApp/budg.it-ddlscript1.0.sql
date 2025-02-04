@@ -2,54 +2,42 @@
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+SET @OLD_SQL_MOexpensesDE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema budgit
 -- -----------------------------------------------------
--- -----------------------------------------------------
--- Schema apartmentx
--- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `budgit` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `budgit`;
 
 -- -----------------------------------------------------
--- Schema apartmentx
+-- Table `budgit`.`income`
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `apartmentx` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
-USE `apartmentx` ;
-
--- -----------------------------------------------------
--- Table `apartmentx`.`apartments`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `apartmentx`.`apartments` (
-  `ID` INT(11) NOT NULL AUTO_INCREMENT,
-  `NAME` VARCHAR(45) NOT NULL,
-  `NUMBER_BEDS` INT(11) NOT NULL,
-  `NUMBER_BATHS` INT(11) NOT NULL,
-  `FLOOR_SPACE` INT(11) NOT NULL,
-  `PRICE` FLOAT NOT NULL,
-  `QUANTITY` INT(11) NOT NULL,
-  PRIMARY KEY (`ID`))
-ENGINE = InnoDB
+CREATE TABLE IF NOT EXISTS `budgit`.`income` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `DESCRIPTION` VARCHAR(45) NOT NULL,
+  `AMOUNT` DECIMAL(10,2) NOT NULL,
+  `DATE` DATE NOT NULL,
+  `NOTES` VARCHAR(255),
+  PRIMARY KEY (`ID`)
+) ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin;
 
 -- -----------------------------------------------------
--- Table `apartmentx`.`users`
+-- Table `budgit`.`expenses`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `apartmentx`.`users` (
-  `ID` INT(11) NOT NULL AUTO_INCREMENT,
-  `TYPE` VARCHAR(45) NOT NULL,
-  `USERNAME` VARCHAR(45) NOT NULL,
-  `EMAIL` VARCHAR(45) NOT NULL,
-  `PASSWORD` VARCHAR(45) NOT NULL,
-  `FIRST_NAME` VARCHAR(45) NOT NULL,
-  `LAST_NAME` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`ID`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 4
+CREATE TABLE IF NOT EXISTS `budgit`.`expenses` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `DESCRIPTION` VARCHAR(45) NOT NULL,
+  `AMOUNT` DECIMAL(10,2) NOT NULL,
+  `CATEGORY` VARCHAR(45) NOT NULL,
+  `DATE` DATE NOT NULL,
+  `NOTES` VARCHAR(255),
+  PRIMARY KEY (`ID`)
+) ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

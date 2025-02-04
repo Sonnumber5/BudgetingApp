@@ -9,14 +9,16 @@ public class ExpenseModel {
     private String description;
     private double amount;
     private String category;
-   // private LocalDate date;
+    private LocalDate date;
+    private String notes;
 
     //constructor
-    public ExpenseModel(String description, double amount, String category) {
+    public ExpenseModel(String description, double amount, String category, LocalDate date, String notes) {
         this.description = description;
         this.amount = amount;
         this.category = category;
-        //this.date = date;
+        this.date = date;
+        this.notes = notes;
     }
 
     //getters and setters
@@ -44,7 +46,7 @@ public class ExpenseModel {
         this.category = category;
     }
     
-    /*
+    
     public LocalDate getDate() {
         return date;
     }
@@ -52,5 +54,12 @@ public class ExpenseModel {
     public void setDate(LocalDate date) {
         this.date = date;
     }
-    */
+    
+    public String getNotes() {
+    	return notes;
+    }
+    
+    public void setNotes(String notes) {
+    	this.notes = notes;
+    }
 }

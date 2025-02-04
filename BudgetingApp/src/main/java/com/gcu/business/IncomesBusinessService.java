@@ -1,40 +1,35 @@
 package com.gcu.business;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.gcu.model.IncomeModel;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.gcu.data.IncomeDataService;
+import com.gcu.data.entities.IncomeEntity;
 
 //main business logic for the income 
 public class IncomesBusinessService implements IncomesBusinessInterface {
-
-	private List<IncomeModel> incomes = new ArrayList<>();
+	
+	@Autowired
+	private IncomeDataService incomeDataService;
 	
 	@Override
-	public void test() {
-		System.out.println("Hello from the IncomesBusinessService");
-	}
-	
-	//adds an income item to the list of IncomeModels 
-	@Override
-    public void addIncome(String description, double amount, LocalDate date) {
-        incomes.add(new IncomeModel(description, amount, date));  
+    public void addIncome(String description, double amount, LocalDate date, String notes) {
+        IncomeEntity income = new IncomeEntity(description, amount, date, notes);
+        try {
+        	incomeDataService.create(income);
+        } catch(Exception e) {
+        	e.printStackTrace();
+        }
     }
-
-	//retreives all income items 
-	@Override
-	public List<IncomeModel> getIncomes(){
-        return incomes;
-	}
 	
 	@Override
 	public void init() {
-		System.out.println("init test from IncomesBusinessService");
+		System.out.println("IncomesBusinessService init method call");
 	}
 	
 	@Override
 	public void destroy() {
-		System.out.println("destroy test from IncomesBusinessService");
+		System.out.println("IncomesBusinessService destroy method call");
 	}
 }
