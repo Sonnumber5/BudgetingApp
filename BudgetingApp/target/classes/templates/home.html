@@ -3,11 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <title th:text="${title}">Home</title>
-		<!-- This file will be using styles.css for formatting (as well as defaultTemplate)-->
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
         <div layout:fragment="content">
+			<div>
+				<thead>
+					<tr>
+						<td>Total Expenses: <span th:text="${addExpenses}"></span></td>
+					</tr>
+				</thead>
+			</div>
             <div>
 				<!-- this is a button and it sends a signal to the controller that contians the @GetMapping("/incomes"). The id refers to the style of button from the styles.css stylesheet-->
                 <a href="#" th:href="@{/incomes}" id="income" style="margin-right: 10px;">
