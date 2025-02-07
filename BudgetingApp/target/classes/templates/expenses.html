@@ -1,55 +1,75 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout"http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
-	<body>
-		<div layout:fragment="content">
-			<form action="/addExpense" method="post">
-                <div>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+      layout:decorate="layouts/defaultTemplate">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Expenses</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div layout:fragment="content">
+        <section class="main-form">
+            <h2>Add Expense</h2>
+            <form action="/addExpense" method="post">
+                <div class="form-group">
                     <label for="description">Description</label>
                     <input type="text" id="description" name="description" required>
                 </div>
-                <div>
-                    <label for="amount">Amount</label>
-                    <input type="number" id="amount" name="amount" step="0.01" required>
+				<div class="form-group">
+				    <label for="amount">Amount</label>
+				    <input type="number" id="amount" name="amount" step="0.01" required>
+				</div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <input type="text" id="category" name="category" step="category" required>
                 </div>
-				<div>
-                   <label for="category">Category</label>
-                   <input type="text" id="category" name="category" step="category" required>
-               </div>
-			   <div>
-					<label for="date">Date</label>
-					<input type="date" id="date" name="date" required>
-			   </div>
-			   <div>
-					<label for="notes">Notes</label>
-					<input type="text" id="notes" name="notes">
-			   </div>
-                <div>
-                    <button id="addExpense" type="submit">Add Expense</button>
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <input type="text" id="notes" name="notes">
+                </div>
+                <div class="form-group">
+                    <button id="addExpense" class="add-expense-btn" type="submit">Add Expense</button>
                 </div>
             </form>
-			<table style="width:50%">
-					<thead>
-						<tr>
-							<th style="text-align:center">Description</th>
-							<th style="text-align:center">Amount</th>
-							<th style="text-align:center">Category</th>
-							<th style = "text-align:center">Date</th>
-							<th style="text-align:center">Notes</th>
-						</tr>		
-					</thead>
-					<tbody>
-						<tr th:if="${expenses.empty}">
-							<td style="text-align:center" colspan="4"> No Expenses Yet </td>
-						</tr>
-						<tr th:each="expense : ${expenses}">
-							<td style="text-align:center"><h5 th:text="${expense.description}">Walmart</h5></td>
-							<td style="text-align:center"><h5 th:text="${expense.amount}">0.00</h5></td>
-							<td style="text-align:center"><h5 th:text="${expense.category}">Groceries</h5></td>
-							<td style="text-align:center"><h5 th:text="${#dates.format(#dates.createNow(), 'MM/dd/yy')}">1/1/01</h5></td>
-							<td style="text-align:center"><h5 th:text="${expense.notes != null ? expense.notes : 'No notes'}">Notes</h5></td>
-						</tr>
-					</tbody>
-				</table>
-		</div>
-	</body>
+        </section>
+
+        <section class="main-table">
+            <h2>Expenses</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Amount</th>
+						<th>Category</th>
+                        <th>Date</th>
+                        <th>Notes</th>
+						<th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${expenses == null or expenses.isEmpty()}">
+                        <td colspan="5" class="no-expense">No Expenses Yet</td>
+                    </tr>
+                    <tr th:each="expense : ${expenses}">
+                        <td><span th:text="${expense.description}">Salary</span></td>
+                        <td><span th:text="'$' + ${#numbers.formatDecimal(expense.amount, 1, 2)}">0.00</span></td>
+						<td><span th:text="${expense.category}">Groceries</span></td>
+                        <td><span th:text="${#dates.format(#dates.createNow(), 'MM/dd/yy')}">1/1/01</span></td>
+                        <td><span th:text="${expense.notes != null ? expense.notes : 'No notes'}">Notes</span></td>
+                        <td>
+                            <form th:action="@{/deleteExpense}" method="post">
+                                <button type="submit" th:name="expenseId" class="delete-btn" th:value="${expense.id}">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</body>
 </html>

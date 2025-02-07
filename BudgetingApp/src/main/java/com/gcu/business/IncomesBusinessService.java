@@ -1,6 +1,7 @@
 package com.gcu.business;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,5 +32,15 @@ public class IncomesBusinessService implements IncomesBusinessInterface {
 	@Override
 	public void destroy() {
 		System.out.println("IncomesBusinessService destroy method call");
+	}
+
+	@Override
+	public double calculateTotalIncomes() {
+		List<IncomeEntity> incomes = incomeDataService.findAll();
+		double total = 0.00;
+		for (IncomeEntity income : incomes) {
+			total += income.getAmount();
+		}
+		return total;
 	}
 }
