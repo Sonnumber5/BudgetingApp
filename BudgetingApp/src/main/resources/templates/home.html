@@ -3,33 +3,38 @@
     <head>
         <meta charset="UTF-8">
         <title th:text="${title}">Home</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" th:href="@{/styles.css}">
     </head>
     <body>
-        <div layout:fragment="content">
-			<div>
-				<thead>
-					<tr>
-						<td>Total Expenses: <span th:text="${addExpenses}"></span></td>
-					</tr>
-				</thead>
-			</div>
-            <div>
-				<!-- this is a button and it sends a signal to the controller that contians the @GetMapping("/incomes"). The id refers to the style of button from the styles.css stylesheet-->
-                <a href="#" th:href="@{/incomes}" id="income" style="margin-right: 10px;">
-                    <button type="button" id="income">Income</button>
-                </a>
+		<section>
+			<div layout:fragment="content">
+				<div class="result-container">
+				    <div class="result-box">
+				        <span>Total Expenses</span>
+				        <span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(expenses, 1, 2)}"></span>
+				    </div>
+				    <div class="result-box">
+				        <span>Total Income</span>
+				        <span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(incomes, 1, 2)}"></span>
+				    </div>
+				    <div class="result-box">
+				        <span>Remaining</span>
+				        <span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(incomes - expenses, 1, 2)}"></span>
+				    </div>
+				</div>
+				<div class="button-group">
+				    <a href="#" th:href="@{/incomes}">
+				        <button type="button" class="add-income-btn">Income</button>
+				    </a>
+				    <a href="#" th:href="@{/expenses}">
+				        <button type="button" class="add-expense-btn">Expenses</button>
+				    </a>
+				    <a href="#" th:href="@{/budget}">
+				        <button type="button" class="btn">Budget</button>
+				    </a>
+				</div>
 
-				<!-- this is a button and it sends a signal to the controller that contians the @GetMapping("/expense"). The id refers to the style of button from the styles.css stylesheet-->
-                <a href="#" th:href="@{/expenses}" id="expenses" style="margin-right: 10px;">
-                    <button type="button" id="expenses">Expenses</button>
-                </a>
-
-				<!-- this is a button and it sends a signal to the controller that contians the @GetMapping("/budget"). The id refers to the style of button from the styles.css stylesheet-->
-                <a href="#" th:href="@{/budget}" id="budget">
-                    <button type="button" id="budget">Budget</button>
-                </a>
-            </div>
-        </div>
+        	</div>
+		</section>
     </body>
 </html>

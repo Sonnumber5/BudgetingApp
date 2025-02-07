@@ -16,13 +16,10 @@ import com.gcu.data.repositories.ExpenseRepository;
 public class ExpenseDataService implements DataAccessInterface<ExpenseEntity>{
 	@Autowired
 	private ExpenseRepository expenseRepository;
-	@SuppressWarnings("unused")
-	private DataSource source;
 	private JdbcTemplate jdbcTemplate;
 	
 	public ExpenseDataService(ExpenseRepository expenseRepository, DataSource source) {
 		this.expenseRepository = expenseRepository;
-		this.source = source;
 		this.jdbcTemplate = new JdbcTemplate(source);
 	}
 	
