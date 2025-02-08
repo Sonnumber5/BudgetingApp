@@ -49,9 +49,7 @@ public class IncomeController {
     @PostMapping("/deleteIncome")
     public String deleteIncome(Model model, @RequestParam("incomeId") int id, RedirectAttributes redirectAttributes) { 
         	dataService.delete(id);
-        
-        List<IncomeEntity> incomes = dataService.findAll();
-        model.addAttribute("incomes", incomes);
-        return "/incomes";
+
+        return "redirect:/incomes";
     }
 }
