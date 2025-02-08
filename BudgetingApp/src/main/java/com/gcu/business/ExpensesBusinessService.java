@@ -2,6 +2,7 @@ package com.gcu.business;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +56,9 @@ public class ExpensesBusinessService implements ExpensesBusinessInterface {
 
 	@Override
 	public List<List<ExpenseEntity>> categorizeExpenses() {
-		List<ExpenseEntity> expenses = expenseRepository.findAll();
+		List<ExpenseEntity> unsortedExpenses = expenseRepository.findAll();
+		List<ExpenseEntity> expenses = this.descByDate(unsortedExpenses);
+		
 		Map<String, List<ExpenseEntity>> bucket = new HashMap<>();
 		
 		for (ExpenseEntity expense : expenses) {
@@ -70,5 +73,10 @@ public class ExpensesBusinessService implements ExpensesBusinessInterface {
 			result.add(list);
 		}
 		return result;
+	}
+
+	@Override
+	public List<ExpenseEntity> descByDate(List<ExpenseEntity> list) {
+		return list.stream().sorted(Comparator.comparing(ExpenseEntity::getDate).reversed()).toList();
 	}
 }

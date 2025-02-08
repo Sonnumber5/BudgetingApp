@@ -1,7 +1,10 @@
 package com.gcu.data;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 import javax.sql.DataSource;
 
@@ -30,7 +33,8 @@ public class IncomeDataService implements DataAccessInterface<IncomeEntity>{
 			incomes.addAll(incomeRepository.findAll());
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
+		}	
+		
 		return incomes;
 	}
 
