@@ -45,7 +45,7 @@ public class IncomeController {
     	incomesBusinessInterface.addIncome(income.getDescription(), income.getAmount(), income.getDate(), income.getNotes());
         return "redirect:/incomes";
     }
-    
+    //
     @PostMapping("/deleteIncome")
     public String deleteIncome(Model model, @RequestParam("incomeId") int id, RedirectAttributes redirectAttributes) { 
         	dataService.delete(id);
