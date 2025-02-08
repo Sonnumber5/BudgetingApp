@@ -1,6 +1,8 @@
 package com.gcu.model;
 
-import java.time.LocalDate;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -13,12 +15,13 @@ public class IncomeModel {
 	private double amount;
 	
 	@NotNull(message="Date is a required field")
-	private LocalDate date;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date date;
 	
 	private String notes;
 	
 	//constructor
-	public IncomeModel(String description, double amount, LocalDate date, String notes) {
+	public IncomeModel(String description, double amount, Date date, String notes) {
 		this.description = description;
 		this.amount = amount;
 		this.date = date;
@@ -42,11 +45,11 @@ public class IncomeModel {
 		this.amount = amount;
 	}
 	
-	public LocalDate getDate() {
+	public Date getDate() {
 		return date;
 	}
 	
-	public void setDate(LocalDate date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	

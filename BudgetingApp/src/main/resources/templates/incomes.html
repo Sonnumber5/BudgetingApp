@@ -53,7 +53,7 @@
                     <tr th:each="income : ${incomes}">
                         <td><span th:text="${income.description}">Salary</span></td>
                         <td><span th:text="'$' + ${#numbers.formatDecimal(income.amount, 1, 2)}">0.00</span></td>
-                        <td><span th:text="${#dates.format(#dates.createNow(), 'MM/dd/yy')}">1/1/01</span></td>
+                        <td><span th:text="${#dates.format(income.date, 'MM/dd/yy')}">1/1/01</span></td>
                         <td><span th:text="${income.notes != null ? income.notes : 'No notes'}">Notes</span></td>
                         <td>
                             <form th:action="@{/deleteIncome}" method="post">

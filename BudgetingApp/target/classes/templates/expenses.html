@@ -21,8 +21,14 @@
 				    <input type="number" id="amount" name="amount" step="0.01" required>
 				</div>
                 <div class="form-group">
-                    <label for="category">Category</label>
-                    <input type="text" id="category" name="category" step="category" required>
+					<label for="category">Category</label>
+						<div class="category-container">
+							<select class="selector" name="category" id="category">
+								<option value="" selected disabled>Select a category</option>
+								<option for="category" th:each="category : ${categories}" th:value="${category[0].category}" th:text="${category[0].category}">Category</option>
+							</select>
+	                    <input type="text" id="newCategory" name="newCategory" placeholder="New Category">
+					</div>
                 </div>
                 <div class="form-group">
                     <label for="date">Date</label>
@@ -38,38 +44,39 @@
             </form>
         </section>
 
-        <section class="main-table">
-            <h2>Expenses</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Description</th>
-                        <th>Amount</th>
-						<th>Category</th>
-                        <th>Date</th>
-                        <th>Notes</th>
-						<th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:if="${expenses == null or expenses.isEmpty()}">
-                        <td colspan="5" class="no-expense">No Expenses Yet</td>
-                    </tr>
-                    <tr th:each="expense : ${expenses}">
-                        <td><span th:text="${expense.description}">Salary</span></td>
-                        <td><span th:text="'$' + ${#numbers.formatDecimal(expense.amount, 1, 2)}">0.00</span></td>
-						<td><span th:text="${expense.category}">Groceries</span></td>
-                        <td><span th:text="${#dates.format(#dates.createNow(), 'MM/dd/yy')}">1/1/01</span></td>
-                        <td><span th:text="${expense.notes != null ? expense.notes : 'No notes'}">Notes</span></td>
-                        <td>
-                            <form th:action="@{/deleteExpense}" method="post">
-                                <button type="submit" th:name="expenseId" class="delete-btn" th:value="${expense.id}">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+			<div class="main-table" th:each="categoryList : ${categories}">
+				<h3 th:text="${categoryList[0].category}">Category</h3>
+	            <table>
+	                <thead>
+	                    <tr>
+	                        <th>Description</th>
+	                        <th>Amount</th>
+							<th>Category</th>
+	                        <th>Date</th>
+	                        <th>Notes</th>
+							<th></th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr th:if="${categoryList == null or categoryList.isEmpty()}">
+	                        <td colspan="5" class="no-expense">No Expenses Yet</td>
+	                    </tr>
+	                    <tr th:each="expense : ${categoryList}">
+	                        <td><span th:text="${expense.description}">Salary</span></td>
+	                        <td><span th:text="'$' + ${#numbers.formatDecimal(expense.amount, 1, 2)}">0.00</span></td>
+							<td><span th:text="${expense.category}">Groceries</span></td>
+	                        <td><span th:text="${#dates.format(expense.date, 'MM/dd/yy')}">1/1/01</span></td>
+	                        <td><span th:text="${expense.notes != null ? expense.notes : 'No notes'}">Notes</span></td>
+	                        <td>
+	                            <form th:action="@{/deleteExpense}" method="post">
+	                                <button type="submit" th:name="expenseId" class="delete-btn" th:value="${expense.id}">Delete</button>
+	                            </form>
+	                        </td>
+	                    </tr>
+	                </tbody>
+	            </table>
+			</div>
+        </div>
     </div>
 </body>
 </html>

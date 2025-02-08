@@ -16,13 +16,10 @@ import com.gcu.data.repositories.IncomeRepository;
 public class IncomeDataService implements DataAccessInterface<IncomeEntity>{
 	@Autowired
 	private IncomeRepository incomeRepository;
-	@SuppressWarnings("unused")
-	private DataSource source;
 	private JdbcTemplate jdbcTemplate;
 	
 	public IncomeDataService (IncomeRepository incomeRepository, DataSource source) {
 		this.incomeRepository = incomeRepository;
-		this.source = source;
 		this.jdbcTemplate = new JdbcTemplate(source);
 	}
 	

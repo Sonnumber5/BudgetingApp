@@ -31,17 +31,24 @@ public class ExpenseController {
 
     @GetMapping("/expenses")
     public String showExpensePage(Model model) {
-    	List<ExpenseEntity> expenses = expenseRepository.findAll();
+    	List<List<ExpenseEntity>> categories = expensesBusinessInterface.categorizeExpenses();
     	
-        model.addAttribute("title", "My Expenses"); 
-        model.addAttribute("expenses", expenses); 
+        model.addAttribute("title", "My Expenses");  
+        model.addAttribute("categories", categories);
 
         return "expenses";
     }
     
     @PostMapping("/addExpense")
-    public String addIncome(@ModelAttribute ExpenseModel expense, Model model) {
-    	expensesBusinessInterface.addExpense(expense.getDescription(), expense.getAmount(), expense.getCategory(), expense.getDate(), expense.getNotes());
+    public String addIncome(@ModelAttribute ExpenseModel expense, Model model, @RequestParam(required = false) String newCategory) {
+    	if (newCategory != null && !newCategory.isEmpty()) {
+            expense.setCategory(newCategory);
+        }
+    	if (expense.getCategory() == null) {
+    		expense.setCategory("Default Category");
+    	}
+    		expensesBusinessInterface.addExpense(expense.getDescription(), expense.getAmount(), expense.getCategory(), expense.getDate(), expense.getNotes());
+    	
         return "redirect:/expenses";
     }
     

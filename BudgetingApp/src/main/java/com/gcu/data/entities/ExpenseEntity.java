@@ -1,6 +1,6 @@
 package com.gcu.data.entities;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
@@ -22,14 +22,14 @@ public class ExpenseEntity {
 	private String category;
 	
 	@Column("DATE")
-	private LocalDate date;
+	private Date date;
 	
 	@Column("NOTES")
 	private String notes;
 	
 	public ExpenseEntity() {}
 	
-	public ExpenseEntity(int id, String description, double amount, String category, LocalDate date, String notes) {
+	public ExpenseEntity(int id, String description, double amount, String category, Date date, String notes) {
 		this.id = id;
 		this.description = description;
 		this.amount = amount;
@@ -38,7 +38,7 @@ public class ExpenseEntity {
 		this.notes = notes;
 	}
 	
-	public ExpenseEntity(String description, double amount, String category, LocalDate date, String notes) {
+	public ExpenseEntity(String description, double amount, String category, Date date, String notes) {
 		this.description = description;
 		this.amount = amount;
 		this.category = category;
@@ -78,11 +78,11 @@ public class ExpenseEntity {
 		this.category = category;
 	}
 
-	public LocalDate getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

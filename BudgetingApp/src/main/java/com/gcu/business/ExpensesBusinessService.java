@@ -1,7 +1,11 @@
 package com.gcu.business;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,7 +23,7 @@ public class ExpensesBusinessService implements ExpensesBusinessInterface {
 	
 	//used too add an expense item to the list
 	@Override
-    public void addExpense(String description, double amount, String category, LocalDate date, String notes) {
+    public void addExpense(String description, double amount, String category, Date date, String notes) {
 		ExpenseEntity expense = new ExpenseEntity(description, amount, category, date, notes);
 		try {
 			expenseDataService.create(expense);
@@ -47,5 +51,24 @@ public class ExpensesBusinessService implements ExpensesBusinessInterface {
 	@Override
 	public void destroy() {
 		System.out.println("destroy test from ExpensesBusinessService");
+	}
+
+	@Override
+	public List<List<ExpenseEntity>> categorizeExpenses() {
+		List<ExpenseEntity> expenses = expenseRepository.findAll();
+		Map<String, List<ExpenseEntity>> bucket = new HashMap<>();
+		
+		for (ExpenseEntity expense : expenses) {
+			if (!bucket.containsKey(expense.getCategory())) {
+				bucket.put(expense.getCategory(), new ArrayList<>());
+			}
+			bucket.get(expense.getCategory()).add(expense);
+		}
+		
+		List<List<ExpenseEntity>> result = new ArrayList<>();
+		for (List<ExpenseEntity> list : bucket.values()) {
+			result.add(list);
+		}
+		return result;
 	}
 }

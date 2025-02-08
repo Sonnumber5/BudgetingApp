@@ -1,6 +1,7 @@
 package com.gcu.business;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class IncomesBusinessService implements IncomesBusinessInterface {
 	private IncomeDataService incomeDataService;
 	
 	@Override
-    public void addIncome(String description, double amount, LocalDate date, String notes) {
+    public void addIncome(String description, double amount, Date date, String notes) {
         IncomeEntity income = new IncomeEntity(description, amount, date, notes);
         try {
         	incomeDataService.create(income);
