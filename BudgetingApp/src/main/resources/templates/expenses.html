@@ -46,6 +46,7 @@
 
 			<div class="main-table" th:each="categoryList : ${categories}">
 				<h3 th:text="${categoryList[0].category}">Category</h3>
+				<h5 th:text="' (Total Spent: $' + ${#aggregates.sum(categoryList.![amount])} + ')'">Category Income</h5>
 	            <table>
 	                <thead>
 	                    <tr>
