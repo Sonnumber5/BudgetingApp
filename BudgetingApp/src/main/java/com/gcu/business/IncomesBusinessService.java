@@ -1,6 +1,7 @@
 package com.gcu.business;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -43,5 +44,10 @@ public class IncomesBusinessService implements IncomesBusinessInterface {
 			total += income.getAmount();
 		}
 		return total;
+	}
+
+	@Override
+	public List<IncomeEntity> descByDate(List<IncomeEntity> list) {
+		return list.stream().sorted(Comparator.comparing(IncomeEntity::getDate).reversed()).toList();
 	}
 }

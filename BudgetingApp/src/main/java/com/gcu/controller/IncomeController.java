@@ -31,10 +31,11 @@ public class IncomeController {
 
     @GetMapping("/incomes")
     public String showIncomes(Model model) {
-        List<IncomeEntity> incomes = incomeRepository.findAll();
+        List<IncomeEntity> unsortedIncomes = incomeRepository.findAll();
+        List<IncomeEntity> incomesSortedByDate = incomesBusinessInterface.descByDate(unsortedIncomes);
         
         model.addAttribute("title", "My Income");
-        model.addAttribute("incomes", incomes);
+        model.addAttribute("incomesSortedByDate", incomesSortedByDate);
 
         return "incomes"; 
     }

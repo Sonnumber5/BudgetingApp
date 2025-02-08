@@ -1,6 +1,9 @@
 package com.gcu.business;
 
 import java.util.Date;
+import java.util.List;
+
+import com.gcu.data.entities.IncomeEntity;
 
 public interface IncomesBusinessInterface {
 	
@@ -9,4 +12,5 @@ public interface IncomesBusinessInterface {
 	public void destroy();
 	public void addIncome(String description, double amount, Date date, String notes);
 	public double calculateTotalIncomes();
+	public List<IncomeEntity> descByDate(List<IncomeEntity> list);
 }

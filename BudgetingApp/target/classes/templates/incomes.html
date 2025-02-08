@@ -47,10 +47,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:if="${incomes == null or incomes.isEmpty()}">
+                    <tr th:if="${incomesSortedByDate == null or incomesSortedByDate.isEmpty()}">
                         <td colspan="5" class="no-income">No Income Yet</td>
                     </tr>
-                    <tr th:each="income : ${incomes}">
+                    <tr th:each="income : ${incomesSortedByDate}">
                         <td><span th:text="${income.description}">Salary</span></td>
                         <td><span th:text="'$' + ${#numbers.formatDecimal(income.amount, 1, 2)}">0.00</span></td>
                         <td><span th:text="${#dates.format(income.date, 'MM/dd/yy')}">1/1/01</span></td>
