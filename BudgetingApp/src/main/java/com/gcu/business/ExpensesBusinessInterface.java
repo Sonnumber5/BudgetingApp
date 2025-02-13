@@ -12,6 +12,6 @@ public interface ExpensesBusinessInterface {
 	public void destroy();
 	public void addExpense(String description, double amount, String category, Date date, String notes);
 	public double calculateTotalExpenses();
-	public List<List<ExpenseEntity>> categorizeExpenses();
-	public List<ExpenseEntity> descByDate(List<ExpenseEntity> list); 
+	public List<ExpenseEntity> descByDate();
+	public List<List<ExpenseEntity>> categorizeExpenses(List<ExpenseEntity> totalExpenses); 
 }

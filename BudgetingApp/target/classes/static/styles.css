@@ -70,23 +70,34 @@ button {
 	transition: 0.3s;
 }
 
-.add-income-btn {
-    background: linear-gradient(#28a745, #218838);
-	box-shadow: 0 0 12px rgb(148, 239, 142);
+.income-btn {
+    background: linear-gradient(rgb(0, 252, 240), rgb(0, 47, 247));
+	box-shadow: 0 0 12px rgb(0, 255, 250);
 }
 
-.add-income-btn:hover {
+.income-btn:hover {
     scale: 1.007;
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 	transition: 0.3s;
 }
 
-.add-expense-btn {
-    background: linear-gradient(rgb(255, 110, 14), rgb(226, 66, 15));
+.fund-btn {
+    background: linear-gradient(rgb(255, 0, 254), rgb(122, 0, 255));
+	box-shadow: 0 0 12px rgb(230, 0, 255);
+}
+
+.fund-btn:hover {
+    scale: 1.007;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+	transition: 0.3s;
+}
+
+.expense-btn {
+    background: linear-gradient(rgb(255, 201, 0), rgb(255, 85, 0));
 	box-shadow: 0 0 12px rgb(255, 113, 93);
 }
 
-.add-expense-btn:hover {
+.expense-btn:hover {
     scale: 1.007;
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 	transition: 0.3s;

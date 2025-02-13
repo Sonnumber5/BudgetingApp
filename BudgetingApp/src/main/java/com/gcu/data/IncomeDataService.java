@@ -1,10 +1,7 @@
 package com.gcu.data;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
 
 import javax.sql.DataSource;
 
@@ -60,17 +57,18 @@ public class IncomeDataService implements DataAccessInterface<IncomeEntity>{
 		}
 		return true;
 	}
-
+	
 	@Override
-	public boolean update(IncomeEntity income, String fieldName, String newValue) {
-		try {
-			jdbcTemplate.update("UPDATE INCOME SET ? = ? WHERE ID = ?", fieldName, newValue, income.getId());
-		} catch(Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
+    public boolean update(IncomeEntity income) {
+        String sql = "UPDATE INCOME SET DESCRIPTION = ?, AMOUNT = ?, DATE = ?, NOTES = ? WHERE ID = ?";
+        try {
+            jdbcTemplate.update(sql, income.getDescription(), income.getAmount(), income.getDate(), income.getNotes(), income.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 
 	@Override
 	public boolean delete(int id) {

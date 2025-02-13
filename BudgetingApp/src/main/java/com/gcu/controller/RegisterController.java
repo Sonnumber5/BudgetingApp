@@ -1,13 +1,11 @@
 package com.gcu.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.gcu.business.SecurityBusinessService;
 import com.gcu.model.RegisterModel;
 
 import jakarta.validation.Valid;
@@ -15,11 +13,7 @@ import jakarta.validation.Valid;
 @Controller
 public class RegisterController {
 
-	//autowire the SecurityBusinessService business class to this controller
-    @Autowired
-    private SecurityBusinessService security; 
-
-    //handles the GET request for the register form
+	//handles the GET request for the register form
     @GetMapping("/register")
     public String displayRegisterForm(Model model) {
         model.addAttribute("title", "Register Form");

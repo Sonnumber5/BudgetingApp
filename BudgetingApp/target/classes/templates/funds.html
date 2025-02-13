@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+      layout:decorate="layouts/defaultTemplate">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Savings Funds</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div layout:fragment="content">
+        <section class="main-form">
+            <h2>Add Savings Fund</h2>
+            <form action="/fund/addfund" method="post">
+                
+            </form>
+        </section>
+        </div>
+    </div>
+</body>
+</html>

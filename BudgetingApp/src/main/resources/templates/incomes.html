@@ -5,13 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${title}">Income</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" th:href="@{styles.css}">
 </head>
 <body>
     <div layout:fragment="content">
         <section class="main-form">
             <h2>Add Income</h2>
-            <form action="/addIncome" method="post">
+            <form th:action="@{/income/add}" method="post">
                 <div class="form-group">
                     <label for="description">Description</label>
                     <input type="text" id="description" name="description" required>
@@ -29,14 +29,14 @@
                     <input type="text" id="notes" name="notes">
                 </div>
                 <div class="form-group">
-                    <button id="addIncome" class="add-income-btn" type="submit">Add Income</button>
+                    <button class="income-btn" type="submit">Add Income</button>
                 </div>
             </form>
         </section>
 
         <section class="main-table">
             <h2>Income List</h2>
-			<h5 th:text="' (Total Income: $' + ${#aggregates.sum(incomesSortedByDate.![amount])} + ')'">Income</h5>
+			<h5 th:text="' (Total Income: $' + ${#aggregates.sum(incomes.![amount])} + ')'">Income</h5>
             <table>
                 <thead>
                     <tr>
@@ -48,19 +48,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:if="${incomesSortedByDate == null or incomesSortedByDate.isEmpty()}">
+                    <tr th:if="${incomes == null or incomes.isEmpty()}">
                         <td colspan="5" class="no-income">No Income Yet</td>
                     </tr>
-                    <tr th:each="income : ${incomesSortedByDate}">
+                    <tr th:each="income : ${incomes}">
                         <td><span th:text="${income.description}">Salary</span></td>
                         <td><span th:text="'$' + ${#numbers.formatDecimal(income.amount, 1, 2)}">0.00</span></td>
                         <td><span th:text="${#dates.format(income.date, 'MM/dd/yy')}">1/1/01</span></td>
                         <td><span th:text="${income.notes != null ? income.notes : 'No notes'}">Notes</span></td>
                         <td>
-                            <form th:action="@{/deleteIncome}" method="post">
+                            <form th:action="@{/income/delete}" method="post">
                                 <button type="submit" th:name="incomeId" class="delete-btn" th:value="${income.id}">Delete</button>
                             </form>
                         </td>
+						<td>
+							<form th:action="@{/income/update}" method="post">
+								<button type="submit" th:name="incomeId" class="update-btn" th:value="${income.id}">Update</button>
+							</form>
+						</td>
                     </tr>
                 </tbody>
             </table>

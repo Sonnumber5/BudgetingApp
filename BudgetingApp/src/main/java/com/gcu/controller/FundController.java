@@ -16,7 +16,7 @@ import com.gcu.data.entities.ExpenseEntity;
 import com.gcu.model.ExpenseModel;
 
 @Controller
-public class ExpenseController {
+public class FundController {
 
     @Autowired
     private ExpensesBusinessInterface expensesBusinessInterface;
@@ -24,19 +24,20 @@ public class ExpenseController {
     @Autowired
     private ExpenseDataService dataService;
 
-    @GetMapping("/expenses")
-    public String showExpensesView(Model model) {
+    @GetMapping("/funds")
+    public String showExpensePage(Model model) {
     	List<ExpenseEntity> totalExpenses = expensesBusinessInterface.descByDate();
     	List<List<ExpenseEntity>> categories = expensesBusinessInterface.categorizeExpenses(totalExpenses);
     	
-        model.addAttribute("title", "My Expenses");  
+        model.addAttribute("title", "My Savings Funds");  
         model.addAttribute("categories", categories);
 
-        return "expenses";
+        return "funds";
     }
     
+    /*
     @PostMapping("/addExpense")
-    public String addExpense(@ModelAttribute ExpenseModel expense, Model model, @RequestParam(required = false) String newCategory) {
+    public String addFund(@ModelAttribute ExpenseModel expense, Model model, @RequestParam(required = false) String newCategory) {
     	if (newCategory != null && !newCategory.isEmpty()) {
             expense.setCategory(newCategory);
         }
@@ -49,13 +50,14 @@ public class ExpenseController {
     }
     
     @PostMapping("deleteExpense")
-    public String deleteExpense(Model model, @RequestParam("expenseId") int id) {
+    public String deleteFund(Model model, @RequestParam("expenseId") int id) {
     	dataService.delete(id);
     	List<ExpenseEntity> expenses = dataService.findAll();
     	
     	model.addAttribute("expenses", expenses);
     	return "redirect:/expenses";
     }
+    */
     
 }
 
