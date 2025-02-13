@@ -1,6 +1,5 @@
 package com.gcu.business;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -55,28 +54,30 @@ public class ExpensesBusinessService implements ExpensesBusinessInterface {
 	}
 
 	@Override
-	public List<List<ExpenseEntity>> categorizeExpenses() {
-		List<ExpenseEntity> unsortedExpenses = expenseRepository.findAll();
-		List<ExpenseEntity> expenses = this.descByDate(unsortedExpenses);
-		
-		Map<String, List<ExpenseEntity>> bucket = new HashMap<>();
-		
-		for (ExpenseEntity expense : expenses) {
-			if (!bucket.containsKey(expense.getCategory())) {
-				bucket.put(expense.getCategory(), new ArrayList<>());
-			}
-			bucket.get(expense.getCategory()).add(expense);
-		}
-		
-		List<List<ExpenseEntity>> result = new ArrayList<>();
-		for (List<ExpenseEntity> list : bucket.values()) {
-			result.add(list);
-		}
-		return result;
+	public List<List<ExpenseEntity>> categorizeExpenses(List<ExpenseEntity> totalExpenses) {
+	    Map<String, List<ExpenseEntity>> bucket = new HashMap<>();
+	    
+	    for (ExpenseEntity expense : totalExpenses) {
+	        if (!bucket.containsKey(expense.getCategory())) {
+	            bucket.put(expense.getCategory(), new ArrayList<>());
+	        }
+	        bucket.get(expense.getCategory()).add(expense);
+	    }
+	    
+	    // Sort each category by date (descending order)
+	    for (List<ExpenseEntity> categoryExpenses : bucket.values()) {
+	        categoryExpenses.sort(Comparator.comparing(ExpenseEntity::getDate).reversed());
+	    }
+
+	    List<List<ExpenseEntity>> result = new ArrayList<>();
+	    for (List<ExpenseEntity> list : bucket.values()) {
+	        result.add(list);
+	    }
+	    return result;
 	}
 
 	@Override
-	public List<ExpenseEntity> descByDate(List<ExpenseEntity> list) {
-		return list.stream().sorted(Comparator.comparing(ExpenseEntity::getDate).reversed()).toList();
+	public List<ExpenseEntity> descByDate() {
+		return expenseDataService.findAll().stream().sorted(Comparator.comparing(ExpenseEntity::getDate).reversed()).toList();
 	}
 }

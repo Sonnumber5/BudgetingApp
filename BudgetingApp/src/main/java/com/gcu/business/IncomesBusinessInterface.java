@@ -12,5 +12,5 @@ public interface IncomesBusinessInterface {
 	public void destroy();
 	public void addIncome(String description, double amount, Date date, String notes);
 	public double calculateTotalIncomes();
-	public List<IncomeEntity> descByDate(List<IncomeEntity> list);
+	public List<IncomeEntity> descByDate();
 }
