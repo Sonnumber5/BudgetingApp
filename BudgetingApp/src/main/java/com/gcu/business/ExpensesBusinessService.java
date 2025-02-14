@@ -57,6 +57,14 @@ public class ExpensesBusinessService implements ExpensesBusinessInterface {
 	public List<List<ExpenseEntity>> categorizeExpenses(List<ExpenseEntity> totalExpenses) {
 	    Map<String, List<ExpenseEntity>> bucket = new HashMap<>();
 	    
+	    /*
+	    List<String> defaultCategories = List.of("Rent/Mortgage", "Utilities", "Car/Auto", "Groceries", "Subscriptions", "Childcare", "Home Essentials", "Loans", "Indiscriminate");
+	    
+	    for (String category : defaultCategories) {
+	    	bucket.put(category, new ArrayList<>());
+	    }
+	    */
+	    
 	    for (ExpenseEntity expense : totalExpenses) {
 	        if (!bucket.containsKey(expense.getCategory())) {
 	            bucket.put(expense.getCategory(), new ArrayList<>());

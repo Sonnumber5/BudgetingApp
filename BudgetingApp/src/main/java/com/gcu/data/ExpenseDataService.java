@@ -59,9 +59,9 @@ public class ExpenseDataService implements DataAccessInterface<ExpenseEntity>{
 
 	@Override
 	public boolean update(ExpenseEntity expense) {
-		String sql = "UPDATE EXPENSES SET DESCRIPTION = ?, AMOUNT = ?, CATEGORY = ?, DATE = ?, NOTES = ?";
+		String sql = "UPDATE EXPENSES SET DESCRIPTION = ?, AMOUNT = ?, CATEGORY = ?, DATE = ?, NOTES = ? WHERE ID = ?";
 		try {
-			jdbcTemplate.update(sql, expense.getDescription(), expense.getAmount(), expense.getCategory(), expense.getDate(), expense.getNotes());
+			jdbcTemplate.update(sql, expense.getDescription(), expense.getAmount(), expense.getCategory(), expense.getDate(), expense.getNotes(), expense.getId());
 		}catch(Exception e) {
 			e.printStackTrace();
 			return false;

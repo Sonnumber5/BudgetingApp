@@ -53,13 +53,13 @@ public class IncomeController {
     public String showUpdateIncomeView(@RequestParam ("incomeId") int id, Model model) {
     	IncomeEntity incomeToUpdate = dataService.findById(id);
     	model.addAttribute("incomeToUpdate", incomeToUpdate);
-    	return "incomes-update";
+    	return "income-update";
     }
     
     @PostMapping("/income/update/confirm")
     public String confirmUpdateIncome(@RequestParam ("incomeId") int id, @RequestParam String description,  @RequestParam double amount, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date, @RequestParam String notes, Model model) {
     	IncomeEntity income = dataService.findById(id);
-    	
+
     		income.setDescription(description);
     		income.setAmount(amount);
     		income.setDate(date);

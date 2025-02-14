@@ -45,11 +45,12 @@
                         <th>Date</th>
                         <th>Notes</th>
 						<th></th>
+						<th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:if="${incomes == null or incomes.isEmpty()}">
-                        <td colspan="5" class="no-income">No Income Yet</td>
+                        <td colspan="6" class="no-income">No Income Yet</td>
                     </tr>
                     <tr th:each="income : ${incomes}">
                         <td><span th:text="${income.description}">Salary</span></td>
@@ -63,7 +64,7 @@
                         </td>
 						<td>
 							<form th:action="@{/income/update}" method="post">
-								<button type="submit" th:name="incomeId" class="update-btn" th:value="${income.id}">Update</button>
+								<button type="submit" th:name="incomeId" class="update-btn" th:value="${income.id}">Edit</button>
 							</form>
 						</td>
                     </tr>

@@ -11,7 +11,7 @@
     <div layout:fragment="content">
         <section class="main-form">
             <h2>Add Expense</h2>
-            <form action="/addExpense" method="post">
+            <form th:action="@{/expense/add}" method="post">
                 <div class="form-group">
                     <label for="description">Description</label>
                     <input type="text" id="description" name="description" required>
@@ -22,7 +22,7 @@
 				</div>
                 <div class="form-group">
 					<label for="category">Category</label>
-						<div class="category-container">
+						<div class="btn-row-container">
 							<select class="selector" name="category" id="category">
 								<option value="" selected disabled>Select a category</option>
 								<option for="category" th:each="category : ${categories}" th:value="${category[0].category}" th:text="${category[0].category}">Category</option>
@@ -46,7 +46,7 @@
 
 			<div class="main-table" th:each="categoryList : ${categories}">
 				<h3 th:text="${categoryList[0].category}">Category</h3>
-				<h5 th:text="' (Total Spent: $' + ${#aggregates.sum(categoryList.![amount])} + ')'">Category Income</h5>
+				<h5 th:text="' (Total Spent: $' + ${#aggregates.sum(categoryList.![amount])} + ')'">Category Total</h5>
 	            <table>
 	                <thead>
 	                    <tr>
@@ -55,6 +55,7 @@
 							<th>Category</th>
 	                        <th>Date</th>
 	                        <th>Notes</th>
+							<th></th>
 							<th></th>
 	                    </tr>
 	                </thead>
@@ -69,10 +70,15 @@
 	                        <td><span th:text="${#dates.format(expense.date, 'MM/dd/yy')}">1/1/01</span></td>
 	                        <td><span th:text="${expense.notes != null ? expense.notes : 'No notes'}">Notes</span></td>
 	                        <td>
-	                            <form th:action="@{/deleteExpense}" method="post">
+	                            <form th:action="@{/expense/delete}" method="post">
 	                                <button type="submit" th:name="expenseId" class="delete-btn" th:value="${expense.id}">Delete</button>
 	                            </form>
 	                        </td>
+							<td>
+								<form th:action="@{/expense/update}" method="post">
+									<button type="submit" th:name="expenseId" class="btn" th:value="${expense.id}">Edit</button>
+								</form>
+							</td>
 	                    </tr>
 	                </tbody>
 	            </table>
