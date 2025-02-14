@@ -157,17 +157,17 @@ button {
     gap: 15px;
 }
 
-.category-container {
+.btn-row-container {
     display: flex;
     align-items: center;
 }
 
-.category-container select {
+.btn-row-container select {
     width: 80%;
     margin-right: 10px; /* space between dropdown and input field */
 }
 
-.category-container input {
+.btn-row-container input {
     width: 20%; /* adjust width as needed */
 }
 
