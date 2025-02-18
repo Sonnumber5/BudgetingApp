@@ -17,9 +17,13 @@
 				        <span>Total Income</span>
 				        <span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(incomes, 1, 2)}"></span>
 				    </div>
+					<div class="result-box">
+						<span>Total In Savings Funds</span>
+						<span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(funds, 1, 2)}"></span>
+					</div>
 				    <div class="result-box">
 				        <span>Remaining</span>
-				        <span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(incomes - expenses, 1, 2)}"></span>
+				        <span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(incomes - expenses - funds, 1, 2)}"></span>
 				    </div>
 				</div>
 				<div class="button-group">

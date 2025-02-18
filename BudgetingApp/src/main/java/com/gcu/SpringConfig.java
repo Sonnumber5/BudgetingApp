@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.gcu.business.ExpensesBusinessService;
+import com.gcu.business.FundsBusinessService;
 import com.gcu.business.IncomesBusinessService;
 
 //Tells spring this class is a configuration class
@@ -20,5 +21,11 @@ public class SpringConfig {
     @Bean(name="expensesBusinessService", initMethod="init", destroyMethod="destroy")
     public ExpensesBusinessService getExpensesBusiness() {
         return new ExpensesBusinessService();
+    }
+    
+ // this method is used to create an object that will be managed as a bean by Spring.
+    @Bean(name="fundsBusinessService", initMethod="init", destroyMethod="destroy")
+    public FundsBusinessService getFundsBusiness() {
+        return new FundsBusinessService();
     }
 }
