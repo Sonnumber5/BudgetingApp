@@ -5,18 +5,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.gcu.business.ExpensesBusinessInterface;
+import com.gcu.business.ExpenseBusinessInterface;
 import com.gcu.business.FundsBusinessInterface;
-import com.gcu.business.IncomesBusinessInterface;
+import com.gcu.business.IncomeBusinessInterface;
 
 @Controller
 public class HomeController {
 
 	@Autowired
-	ExpensesBusinessInterface expensesBusinessInterface;
+	ExpenseBusinessInterface expensesBusinessInterface;
 	
 	@Autowired
-	IncomesBusinessInterface incomesBusinessInterface;
+	IncomeBusinessInterface incomesBusinessInterface;
 	
 	@Autowired
 	FundsBusinessInterface fundsBusinessInterface;

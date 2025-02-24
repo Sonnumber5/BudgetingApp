@@ -5,14 +5,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title th:text="${title}">Expenses</title>
-	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 
 <body>
 	<div layout:fragment="content">
 		<section class="main-form">
 			<h2>Add Expense</h2>
-			<form th:action="@{/expense/add}" method="post">
+			<form th:action="@{/expenses/createExpense}" method="post">
 				<div class="form-group">
 					<label for="description">Description</label>
 					<input type="text" id="description" name="description" required>
@@ -72,13 +72,13 @@
 						<td><span th:text="${#dates.format(expense.date, 'MM/dd/yy')}">1/1/01</span></td>
 						<td><span th:text="${expense.notes != null ? expense.notes : 'No notes'}">Notes</span></td>
 						<td>
-							<form th:action="@{/expense/delete}" method="post">
+							<form th:action="@{/expenses/deleteExpense}" method="post">
 								<button type="submit" th:name="expenseId" class="delete-btn"
 									th:value="${expense.id}">Delete</button>
 							</form>
 						</td>
 						<td>
-							<form th:action="@{/expense/update}" method="post">
+							<form th:action="@{/expenses/updateExpense}" method="post">
 								<button type="submit" th:name="expenseId" class="btn"
 									th:value="${expense.id}">Edit</button>
 							</form>

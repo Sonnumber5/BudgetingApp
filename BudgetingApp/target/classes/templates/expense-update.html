@@ -12,7 +12,7 @@
 	<div layout:fragment="content">
 		<section class="main-form">
 			<h2>Update Expense</h2>
-			<form th:action="@{/expense/update/confirm}" method="post">
+			<form th:action="@{/expenses/updateExpense/confirm}" method="post">
 				<div class="form-group">
 					<label for="description">Description</label>
 					<input type="text" id="description" th:name="description" th:value="${expenseToUpdate.description}"
@@ -51,14 +51,14 @@
 				<div class="form-group">
 					<label for="notes">Notes</label>
 					<input type="text" id="notes" th:name="notes" th:value="${expenseToUpdate.notes}"
-						th:placeholder="${expenseToUpdate.notes}" required>
+						th:placeholder="${expenseToUpdate.notes}">
 				</div>
 				<div class="form-group">
 					<button class="btn" type="submit" th:name="expenseId"
 						th:value="${expenseToUpdate.id}">Confirm</button>
 				</div>
 			</form>
-			<form th:action="@{/expenses}" method="get">
+			<form th:action="@{/expenses/getExpenses}" method="get">
 				<button class="btn" type="submit">Cancel</button>
 			</form>
 		</section>

@@ -11,7 +11,7 @@
     <div layout:fragment="content">
         <section class="main-form">
             <h2>Update Income</h2>
-            <form th:action="@{/income/update/confirm}" method="post">
+            <form th:action="@{/income/updateIncome/confirm}" method="post">
                 <div class="form-group">
                     <label for="description">Description</label>
                     <input type="text" id="description" th:name="description" th:value="${incomeToUpdate.description}" th:placeholder="${incomeToUpdate.description}"required>
@@ -32,7 +32,7 @@
                     <button class="btn" type="submit" th:name="incomeId" th:value="${incomeToUpdate.id}">Confirm</button>
                 </div>
             </form>
-			<form th:action="@{/incomes}" method="get">
+			<form th:action="@{/income/getIncome}" method="get">
 				<button class="btn" type="submit">Cancel</button>
 			</form>
         </section>
