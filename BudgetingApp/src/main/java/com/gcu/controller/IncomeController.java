@@ -1,8 +1,6 @@
 package com.gcu.controller;
 
-import com.gcu.business.IncomesBusinessInterface;
-import com.gcu.data.IncomeDataService;
-import com.gcu.data.entities.IncomeEntity;
+import com.gcu.business.IncomeBusinessInterface;
 import com.gcu.model.IncomeModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,54 +18,61 @@ import java.util.List;
 @Controller
 public class IncomeController {
 
-    @Autowired 
-    private IncomesBusinessInterface incomesBusinessInterface;
-    
-    @Autowired
-    private IncomeDataService dataService;
+	@Autowired
+	private IncomeBusinessInterface incomeBusinessInterface;
 
-    @GetMapping("/incomes")
-    public String showIncomesView(Model model) {
-        List<IncomeEntity> incomes = incomesBusinessInterface.descByDate();
-        
-        model.addAttribute("title", "My Income");
-        model.addAttribute("incomes", incomes);
+	// -------------- GET ALL INCOMES ---------------//
 
-        return "incomes"; 
-    }
-    
-    @PostMapping("/income/add")
-    public String addIncome(@ModelAttribute IncomeModel income, Model model) {
-    	incomesBusinessInterface.addIncome(income.getDescription(), income.getAmount(), income.getDate(), income.getNotes());
-        return "redirect:/incomes";
-    }
-    
-    @PostMapping("/income/delete")
-    public String deleteIncome(Model model, @RequestParam("incomeId") int id, RedirectAttributes redirectAttributes) { 
-        	dataService.delete(id);
+	@GetMapping("/income/getIncome")
+	public String showIncomesView(Model model) {
+		List<IncomeModel> incomes = incomeBusinessInterface.descByDate(incomeBusinessInterface.getAllIncomes());
 
-        return "redirect:/incomes";
-    }
-    
-    @PostMapping("/income/update")
-    public String showUpdateIncomeView(@RequestParam ("incomeId") int id, Model model) {
-    	IncomeEntity incomeToUpdate = dataService.findById(id);
-    	model.addAttribute("incomeToUpdate", incomeToUpdate);
-    	return "income-update";
-    }
-    
-    @PostMapping("/income/update/confirm")
-    public String confirmUpdateIncome(@RequestParam ("incomeId") int id, @RequestParam String description,  @RequestParam double amount, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date, @RequestParam String notes, Model model) {
-    	IncomeEntity income = dataService.findById(id);
+		model.addAttribute("title", "My Income");
+		model.addAttribute("incomes", incomes);
 
-    		income.setDescription(description);
-    		income.setAmount(amount);
-    		income.setDate(date);
-    		income.setNotes(notes);
-    	
-    	dataService.update(income);
-    	
-    	
-    	return "redirect:/incomes";
-    }
+		return "incomes";
+	}
+
+	// -------------- CREATE INCOME ---------------//
+
+	@PostMapping("/income/addIncome")
+	public String addIncome(@ModelAttribute IncomeModel income, Model model) {
+		incomeBusinessInterface.addIncome(income.getDescription(), income.getAmount(), income.getDate(),
+				income.getNotes());
+		return "redirect:/income/getIncome";
+	}
+
+	// -------------- DELETE INCOME ---------------//
+
+	@PostMapping("/income/deleteIncome")
+	public String deleteIncome(Model model, @RequestParam("incomeId") int id, RedirectAttributes redirectAttributes) {
+		incomeBusinessInterface.deleteIncome(id);
+
+		return "redirect:/income/getIncome";
+	}
+
+	// -------------- UPDATE INCOME ---------------//
+
+	@PostMapping("/income/updateIncome")
+	public String showUpdateIncomeView(@RequestParam("incomeId") int id, Model model) {
+		IncomeModel incomeToUpdate = incomeBusinessInterface.findIncomeById(id);
+		model.addAttribute("incomeToUpdate", incomeToUpdate);
+		return "income-update";
+	}
+
+	@PostMapping("/income/updateIncome/confirm")
+	public String confirmUpdateIncome(@RequestParam("incomeId") int id, @RequestParam String description,
+			@RequestParam double amount, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
+			@RequestParam String notes, Model model) {
+		IncomeModel incomeToUpdate = incomeBusinessInterface.findIncomeById(id);
+
+		incomeToUpdate.setDescription(description);
+		incomeToUpdate.setAmount(amount);
+		incomeToUpdate.setDate(date);
+		incomeToUpdate.setNotes(notes);
+
+		incomeBusinessInterface.updateIncome(incomeToUpdate);
+
+		return "redirect:/income/getIncome";
+	}
 }

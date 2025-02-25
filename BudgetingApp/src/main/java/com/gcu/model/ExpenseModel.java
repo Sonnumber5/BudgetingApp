@@ -10,6 +10,8 @@ import jakarta.validation.constraints.NotNull;
 
 public class ExpenseModel {
 
+	private int id;
+	
 	@NotNull(message="Description is a required field")
     private String description;
 	
@@ -25,7 +27,17 @@ public class ExpenseModel {
 	
     private String notes;
 
-    //constructor
+    public ExpenseModel() {}
+    
+    public ExpenseModel(int id, String description, double amount, String category, Date date, String notes) {
+        this.id = id;
+    	this.description = description;
+        this.amount = amount;
+        this.category = category;
+        this.date = date;
+        this.notes = notes;
+    }
+    
     public ExpenseModel(String description, double amount, String category, Date date, String notes) {
         this.description = description;
         this.amount = amount;
@@ -35,6 +47,15 @@ public class ExpenseModel {
     }
 
     //getters and setters
+    
+    public int getId() {
+    	return id;
+    }
+    
+    public void setId(int id) {
+    	this.id = id;
+    }
+    
     public String getDescription() {
         return description;
     }
