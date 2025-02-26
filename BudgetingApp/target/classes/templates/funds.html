@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/defaultTemplate">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Savings Funds</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <section>
+            <div class="button-group">
+                <a th:href="@{/funds/addFund}">
+                    <button type="button" class="fund-btn">Add Fund</button>
+                </a>
+            </div>
+        </section>
+
+        <!-- Check if funds list is empty -->
+        <div class="main-table" th:if="${#lists.isEmpty(funds)}">
+            <h2>No Funds Yet</h2>
+        </div>
+
+        <!-- Display funds when list is not empty -->
+        <div th:unless="${#lists.isEmpty(funds)}">
+            <h2>Savings Funds</h2>
+
+            <div class="main-form" th:each="fund : ${funds}">
+                <div class="fund-details">
+                    <h3 th:text="${fund.name}">Name</h3>
+                    <h5 th:text="'Goal: ' + ${fund.goal}">Goal</h5>
+                    <div class="fund-group">
+                        <div th:text="'Amount: ' + ${fund.amount}">Amount</div>
+                        <div th:text="'Notes: ' + ${fund.notes}">Notes</div>
+                    </div>
+                </div>
+
+                <!-- Action buttons at the bottom -->
+                <div class="action-buttons">
+                    <form th:action="@{/funds/contribute}" method="post" style="margin-bottom: 10px;">
+                        <button type="submit" class="btn" th:name="fundId" th:value="${fund.id}" style="width: 100%;">Contribute To Fund</button>
+                    </form>
+                    <form th:action="@{/funds/delete}" method="post">
+                        <button type="submit" class="delete-btn" th:name="fundId" th:value="${fund.id}" style="width: 100%;">Delete Fund</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
