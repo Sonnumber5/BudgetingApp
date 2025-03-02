@@ -20,6 +20,7 @@ import com.gcu.business.ExpenseBusinessInterface;
 import com.gcu.model.ExpenseModel;
 
 
+
 @Controller
 @SessionAttributes("categories")
 @RequestMapping("/expenses")
@@ -31,13 +32,16 @@ public class ExpenseController {
 	// -------------- Get All Expenses ---------------//
 
 	@GetMapping("/getExpenses")
-	public String showExpensesView(Model model) {
-		List<ExpenseModel> totalExpenses = expenseBusinessInterface
-				.descByDate(expenseBusinessInterface.getAllExpenses());
-		List<List<ExpenseModel>> categories = expenseBusinessInterface.categorizeExpenses(totalExpenses);
-
+	public String showExpensesView(Model model, HttpSession session) {
+		
+		String filterByDate = (String) session.getAttribute("filterByDate");
+		List<ExpenseModel> expensesByDate = expenseBusinessInterface.getExpensesByDate(filterByDate);
+		List<List<ExpenseModel>> categories = expenseBusinessInterface.categorizeExpenses(expensesByDate);
+		
 		model.addAttribute("title", "My Expenses");
 		model.addAttribute("categories", categories);
+		model.addAttribute("expensesByDate", expensesByDate);
+		model.addAttribute("filterByDate", filterByDate);
 
 		return "expenses";
 	}

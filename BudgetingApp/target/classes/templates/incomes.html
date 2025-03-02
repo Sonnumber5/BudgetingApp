@@ -36,9 +36,10 @@
 		</section>
 
 		<section class="main-table">
-			<h2>Income List</h2>
-			<h5 th:if="${incomes != null and not incomes.isEmpty()}" th:text="' (Total Income: $' + ${#aggregates.sum(incomes.![amount])} + ')'">Income</h5>
-			<h5 th:if="${incomes == null or incomes.isEmpty()}">Total Income: $0.00</h5>
+			<h3 th:text="${filterByDate} + ' Income'">Income List</h3>
+			<h5 th:if="${incomeByDate != null and not incomeByDate.isEmpty()}"
+				th:text="' (Total Income: $' + ${#aggregates.sum(incomeByDate.![amount])} + ')'">Income</h5>
+			<h5 th:if="${incomeByDate == null or incomeByDate.isEmpty()}">Total Income: $0.00</h5>
 			<table>
 				<thead>
 					<tr>
@@ -51,10 +52,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:if="${incomes == null or incomes.isEmpty()}">
+					<tr th:if="${incomeByDate == null or incomeByDate.isEmpty()}">
 						<td colspan="6" class="no-income">No Income Yet</td>
 					</tr>
-					<tr th:each="income : ${incomes}">
+					<tr th:each="income : ${incomeByDate}">
 						<td><span th:text="${income.description}">Salary</span></td>
 						<td><span th:text="'$' + ${#numbers.formatDecimal(income.amount, 1, 2)}">0.00</span></td>
 						<td><span th:text="${#dates.format(income.date, 'MM/dd/yy')}">1/1/01</span></td>

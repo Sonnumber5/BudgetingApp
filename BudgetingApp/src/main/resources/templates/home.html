@@ -1,44 +1,58 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
-    <head>
-        <meta charset="UTF-8">
-        <title type="hidden" th:text="${title}">Title</title>
-        <link rel="stylesheet" th:href="@{/styles.css}">
-    </head>
-    <body>
-		<section>
-			<div layout:fragment="content">
-				<div class="result-container">
-				    <div class="result-box">
-				        <span>Total Expenses</span>
-				        <span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(expenses, 1, 2)}"></span>
-				    </div>
-				    <div class="result-box">
-				        <span>Total Income</span>
-				        <span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(incomes, 1, 2)}"></span>
-				    </div>
-					<div class="result-box">
-						<span>Total In Savings Funds</span>
-						<span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(funds, 1, 2)}"></span>
-					</div>
-				    <div class="result-box">
-				        <span>Remaining</span>
-				        <span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(incomes - expenses - funds, 1, 2)}"></span>
-				    </div>
-				</div>
-				<div class="button-group">
-				    <a href="#" th:href="@{/income/getIncome}">
-				        <button type="button" class="income-btn">Income</button>
-				    </a>
-				    <a href="#" th:href="@{/expenses/getExpenses}">
-				        <button type="button" class="expense-btn">Expenses</button>
-				    </a>
-				    <a href="#" th:href="@{/funds/getFunds}">
-				        <button type="button" class="fund-btn">Savings Funds</button>
-				    </a>
-				</div>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/defaultTemplate">
 
-        	</div>
-		</section>
-    </body>
+<head>
+	<meta charset="UTF-8">
+	<title type="hidden" th:text="${title}">Title</title>
+	<link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+
+<body>
+	<section>
+		<div layout:fragment="content">
+			<div class="result-container">
+				<form th:action="@{/home/filteredDate}" method="post">
+					<div class="form-group">
+						<label for="filterByDate">Filter by date</label>
+						<input type="month" id="filterByDate" name="filterByDate" th:value="${filterByDate}">
+						<button class="btn" type="submit">Filter</button>
+					</div>
+				</form>
+			</div>
+			<div class="result-container">
+				<div class="result-box">
+					<span>Total Expenses</span>
+					<span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(expenses, 1, 2)}"></span>
+				</div>
+				<div class="result-box">
+					<span>Total Income</span>
+					<span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(incomes, 1, 2)}"></span>
+				</div>
+				<div class="result-box">
+					<span>Total In Savings Funds</span>
+					<span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(funds, 1, 2)}"></span>
+				</div>
+				<div class="result-box">
+					<span>Remaining</span>
+					<span style="font-weight: bold;"
+						th:text="'$' + ${#numbers.formatDecimal(incomes - expenses - funds, 1, 2)}"></span>
+				</div>
+			</div>
+			<div class="button-group">
+				<a href="#" th:href="@{/income/getIncome}">
+					<button type="button" class="income-btn">Income</button>
+				</a>
+				<a href="#" th:href="@{/expenses/getExpenses}">
+					<button type="button" class="expense-btn">Expenses</button>
+				</a>
+				<a href="#" th:href="@{/funds/getFunds}">
+					<button type="button" class="fund-btn">Savings Funds</button>
+				</a>
+			</div>
+
+		</div>
+	</section>
+</body>
+
 </html>

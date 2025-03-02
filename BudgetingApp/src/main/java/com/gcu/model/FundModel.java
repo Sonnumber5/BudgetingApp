@@ -1,18 +1,14 @@
 package com.gcu.model;
 
-import javax.validation.constraints.NotNull;
 
 public class FundModel {
 
 	private int id;
 	
-	@NotNull(message="Name is a required field")
 	private String name;
 	
-	@NotNull(message="Goal is a required field")
 	private double goal;
 	
-	@NotNull(message="Amount is a required field")
 	private double amount;
 	
 	private String notes;

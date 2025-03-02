@@ -2,7 +2,6 @@ package com.gcu.model;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -11,13 +10,10 @@ public class IncomeModel {
 	
 	private int id;
 	
-	@NotNull(message="Description is a required field")
 	private String description;
 	
-	@NotNull(message="amount is a required field")
 	private double amount;
 	
-	@NotNull(message="Date is a required field")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;
 	

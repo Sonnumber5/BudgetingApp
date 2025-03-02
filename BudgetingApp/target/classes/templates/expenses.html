@@ -7,11 +7,10 @@
 	<title th:text="${title}">Expenses</title>
 	<link rel="stylesheet" th:href="@{/styles.css}">
 </head>
-
 <body>
 	<div layout:fragment="content">
 		<section class="main-form">
-			<h2>Add Expense</h2>
+			<h3>Add Expense</h3>
 			<form th:action="@{/expenses/createExpense}" method="post">
 				<div class="form-group">
 					<label for="description">Description</label>
@@ -45,6 +44,9 @@
 				</div>
 			</form>
 		</section>
+		<div>
+			<h3 th:text="${filterByDate} + ' Expenses'">Expense List</h3>
+		</div>
 
 		<div class="main-table" th:each="categoryList : ${categories}">
 			<h3 th:text="${categoryList[0].category}">Category</h3>

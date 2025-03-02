@@ -1,17 +1,20 @@
 package com.gcu.business;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gcu.data.ExpenseDataService;
 import com.gcu.data.entities.ExpenseEntity;
 import com.gcu.model.ExpenseModel;
+import com.gcu.model.IncomeModel;
 
 //main business logic for the expenses
 public class ExpenseBusinessService implements ExpenseBusinessInterface {
@@ -71,6 +74,32 @@ public class ExpenseBusinessService implements ExpenseBusinessInterface {
 			result.add(list);
 		}
 		return result;
+	}
+	
+	@Override
+	public List<ExpenseModel> getExpensesByDate(String filterDate) {
+		List<ExpenseModel> allExpenses = this.getAllExpenses();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+
+		List<ExpenseModel> expensesFilteredByDate = allExpenses.stream().filter(expense -> sdf.format(expense.getDate()).equals(filterDate)).collect(Collectors.toList());
+		
+		return descByDate(expensesFilteredByDate);
+	}
+	
+	@Override
+	public double CalculateExpensesByDate(String filterDate) {
+		List<ExpenseModel> allExpenses = this.getAllExpenses();
+		double total = 0;
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+		
+		List<ExpenseModel> expensesFilteredByDate = allExpenses.stream().filter(expense -> sdf.format(expense.getDate()).equals(filterDate)).collect(Collectors.toList());
+		
+		for (ExpenseModel expense : expensesFilteredByDate) {
+			total += expense.getAmount();
+		}
+		return total;
 	}
 
 	// ------------------- FIND ------------------- //

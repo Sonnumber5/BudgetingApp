@@ -3,7 +3,6 @@ package com.gcu.business;
 import java.util.Date;
 import java.util.List;
 
-import com.gcu.data.entities.ExpenseEntity;
 import com.gcu.model.ExpenseModel;
 
 public interface ExpenseBusinessInterface {
@@ -19,4 +18,6 @@ public interface ExpenseBusinessInterface {
 	public List<ExpenseModel> getAllExpenses();
 	public void updateExpense(ExpenseModel expense);
 	public void deleteExpense (int id);
+	public List<ExpenseModel> getExpensesByDate(String filterDate);
+	public double CalculateExpensesByDate(String filterDate);
 }

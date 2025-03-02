@@ -17,4 +17,6 @@ public interface IncomeBusinessInterface {
 	public void deleteIncome(int id);
 	public IncomeModel findIncomeById(int id);
 	public void updateIncome(IncomeModel income);
+	public List<IncomeModel> getIncomeByDate(String filterDate);
+	public double CalculateIncomesByDate(String filterDate);
 }

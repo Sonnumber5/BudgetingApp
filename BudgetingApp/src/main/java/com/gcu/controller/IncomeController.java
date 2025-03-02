@@ -15,6 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class IncomeController {
 
@@ -24,11 +26,14 @@ public class IncomeController {
 	// -------------- GET ALL INCOMES ---------------//
 
 	@GetMapping("/income/getIncome")
-	public String showIncomesView(Model model) {
-		List<IncomeModel> incomes = incomeBusinessInterface.descByDate(incomeBusinessInterface.getAllIncomes());
-
+	public String showIncomesView(Model model, HttpSession session) {
+		
+		String filterByDate = (String) session.getAttribute("filterByDate");
+		List<IncomeModel> incomeByDate = incomeBusinessInterface.getIncomeByDate(filterByDate);
+		
+		model.addAttribute("incomeByDate", incomeByDate);
 		model.addAttribute("title", "My Income");
-		model.addAttribute("incomes", incomes);
+		model.addAttribute("filterByDate", filterByDate);
 
 		return "incomes";
 	}
@@ -73,5 +78,14 @@ public class IncomeController {
 		incomeBusinessInterface.updateIncome(incomeToUpdate);
 
 		return "redirect:/income/getIncome";
+	}
+	
+	// -------------- FILTER INCOME ---------------//
+	
+	@PostMapping("/income/filterByDate")
+	public String filterByDate (Model model, @RequestParam("filterByDate") String filterDate) {
+		List<IncomeModel> incomeByDate = incomeBusinessInterface.getIncomeByDate(filterDate);
+		model.addAttribute("incomeByDate", incomeByDate);
+		return "incomes";
 	}
 }
